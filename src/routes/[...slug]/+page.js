@@ -25,7 +25,9 @@ export async function load({ params }) {
 
     return {
       story: dataStory.data.story,
-      header: dataConfig.data.story.content.header_menu
+      header: dataConfig.data.story.content.header_menu,
+		  logo: dataConfig.data.story.content.logo,
+		  footer: dataConfig.data.story.content
     };
    
   }

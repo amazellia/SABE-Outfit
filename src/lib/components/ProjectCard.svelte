@@ -18,8 +18,10 @@
         <h3 class="text-xl text-[#ff0085] font-bold mb-3">
             {article.title}
         </h3>
+        {#if article.teaser}
         <div class="line-clamp-4">
-            {article.teaser}
+            {article?.teaser}
         </div>
+        {/if}
     </div>
 </a>

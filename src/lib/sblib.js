@@ -22,6 +22,9 @@ export async function useStoryblok(accessToken = '') {
             project: (await import('$lib/components/Project.svelte')).default,
             'all-projects': (await import('$lib/components/AllProjects.svelte')).default,
             'project-highlights': (await import('$lib/components/ProjectHighlights.svelte')).default,
+            'rich-text': (await import('$lib/components/Rich-Text.svelte')).default,
+            'grid_item_report': (await import('$lib/components/GridReportItem.svelte')).default,
+            'gallery': (await import('$lib/components/Gallery.svelte')).default,
 		},
 		// 007 setting some api options like https, cache and region
 		apiOptions: {
