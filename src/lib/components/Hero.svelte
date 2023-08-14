@@ -10,7 +10,7 @@
 		`${heroClasses}`}
 >
 	<div class="relative z-10 text-center">
-		<h2 class="text-6xl text-white font-bold mb-3">
+		<h2 class="text-3xl lg:text-6xl text-white font-bold mb-3">
 			{blok.headline}
 		</h2>
 		<h3 class="text-4xl text-white font-light">
