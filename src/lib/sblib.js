@@ -43,7 +43,7 @@ export async function useStoryblok(accessToken = '') {
 			resolver: (component, blok) => {
 			  switch (component) {
 				case "gallery":
-					if (blok.type == "carousel" || blok.type == undefined) {
+					if (blok.type == "carousel1") {
 						const images = blok.images.map((item, index) => {
 							return `
 								<div class="carousel-item place-content-center">
@@ -70,18 +70,16 @@ export async function useStoryblok(accessToken = '') {
 							</div>
 						`;
 					}					
-					if (blok.type == "carousel_nextprev") {
+					if (blok.type == "carousel" || blok.type == undefined) {
 						const images = blok.images.map((item, i, img) => {
 							const previousItem = i > 0 ? img[i - 1] : null;
 							const nextItem = i < img.length - 1 ? img[i + 1] : null;
 						
 							const prev = previousItem
-								? `<a href="#${previousItem.id}" class="btn ">❮</a>`
-								: `<a href="#" class="btn bg-[#94a3b8]">❮</a>`;
+								? `<a href="#${previousItem.id}" class="btn">❮</a>` : `<p></p>` ;
 							
 							const next = nextItem
-								? `<a href="#${nextItem.id}" class="btn">❯</a>`
-								: `<a class="btn hover:bg-sky-700 bg-[#94a3b8]">❯</a>`;
+								? `<a href="#${nextItem.id}" class="btn">❯</a>` : " ";
 						
 							return `<div id="${item.id}" class="carousel-item place-content-center relative w-full h-screen">
 								<img src="${item.filename}" alt="${item.alt}" class=" h-screen object-cover"/>
