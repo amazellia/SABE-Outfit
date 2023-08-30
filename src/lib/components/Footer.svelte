@@ -6,7 +6,7 @@
 <footer class="p-12">
     <div class="flex flex-col lg:flex-row justify-stretch">
         {#if footer}
-        <div class="basis-auto lg:basis-1/4 flex justify-center items-center text-center">
+        <div class="hidden md:block lg:block basis-auto lg:basis-1/4 flex justify-center items-center text-center">
             <img
             src={logo.filename}
             alt={logo.alt}

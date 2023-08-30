@@ -6,7 +6,7 @@
  
 <div
 	use:storyblokEditable={blok}
-	class={'min-h-[500px] relative flex items-end justify-center p-9 my-6 rounded-[5px] overflow-hidden ' +
+	class={'min-h-[600px] relative flex items-end justify-center p-9 my-6 rounded-[5px] overflow-hidden ' +
 		`${heroClasses}`}
 >
 	<div class="relative z-10 text-center">

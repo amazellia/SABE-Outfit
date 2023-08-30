@@ -29,7 +29,6 @@ export async function useStoryblok(accessToken = '') {
             'project-highlights': (await import('$lib/components/ProjectHighlights.svelte')).default,
             'rich-text': (await import('$lib/components/Rich-Text.svelte')).default,
             grid_item_report: (await import('$lib/components/GridReportItem.svelte')).default,
-            gallery: (await import('$lib/components/Gallery.svelte')).default,
 		},
 		// 007 setting some api options like https, cache and region
 		apiOptions: {
@@ -45,48 +44,71 @@ export async function useStoryblok(accessToken = '') {
 			  switch (component) {
 				case "gallery":
 					if (blok.type == "carousel" || blok.type == undefined) {
+						const images = blok.images.map((item, index) => {
+							return `
+								<div class="carousel-item place-content-center">
+									<img
+										id="${item.id}"
+										src=${item.filename}
+										alt=${item.alt}
+										class="w-auto h-auto" 
+									/>
+								</div>
+							`;
+						});
+					
+						const buttons = blok.images.map((item, index) => {
+							return `<a href="#${item.id}" class="btn btn-xs">${index + 1}</a>`;
+						});
+		
+						return `
+							<div class="carousel content-center w-full h-96 md:h-screen lg:h-screen ">
+								${images.join('')}
+							</div>
+							<div class="flex justify-center w-full py-2 gap-2">
+								${buttons.join('')}
+							</div>
+						`;
+					}					
+					if (blok.type == "carousel_nextprev") {
 						const images = blok.images.map((item, i, img) => {
 							const previousItem = i > 0 ? img[i - 1] : null;
 							const nextItem = i < img.length - 1 ? img[i + 1] : null;
 						
 							const prev = previousItem
-								? `<a href="#${previousItem.id}" class="btn btn-circle">❮</a>`
-								: `<a href="#" class="btn btn-circle bg-[#94a3b8]">❮</a>`;
+								? `<a href="#${previousItem.id}" class="btn ">❮</a>`
+								: `<a href="#" class="btn bg-[#94a3b8]">❮</a>`;
 							
 							const next = nextItem
-								? `<a href="#${nextItem.id}" class="btn btn-circle">❯</a>`
-								: `<a class="btn btn-circle hover:bg-sky-700 bg-[#94a3b8]">❯</a>`;
+								? `<a href="#${nextItem.id}" class="btn">❯</a>`
+								: `<a class="btn hover:bg-sky-700 bg-[#94a3b8]">❯</a>`;
 						
-							return `<div id="${item.id}" class="carousel-item relative w-full h-full">
-								<img src="${item.filename}" alt="${item.alt}" class="w-full h-auto object-cover"/>
+							return `<div id="${item.id}" class="carousel-item place-content-center relative w-full h-screen">
+								<img src="${item.filename}" alt="${item.alt}" class=" h-screen object-cover"/>
 								<div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
 									${prev}
 									${next}
 								</div>
 							</div>`;
 						});
-						const galleries = images.join('');
-	
+
 						return `
-						<div class="carousel w-full">
-							${galleries}
+						<div class="carousel content-center w-full">
+							${images.join('')}
 						</div>`
 					};
-
 					if (blok.type = "sponsors") {
-							const images = blok.images.map((item) => {
-								return ` 
-								<div id="${item.id}" class="w-full p-2">
-								<img src="${item.filename}" alt="${item.alt}" class="w-full h-auto object-cover"/>
-								</div>`;
-							});
-							const galleries = images.join('');
-		
-							return `
-							<div class="carousel w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-    						${galleries}
-							</div>`
-					};
+						const images = blok.images.map((item) => {
+							return ` 
+							<div id="${item.id}" class="w-full p-2">
+							<img src="${item.filename}" alt="${item.alt}" class="w-full h-auto object-cover"/>
+							</div>`;
+						});
+						return `
+						<div class="carousel w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+						${images.join('')}
+						</div>`
+				};
 				case "video":
 					return null
 				default:
