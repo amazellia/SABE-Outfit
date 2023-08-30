@@ -13,7 +13,9 @@
 		}
 	});
 </script>
-
+<svelte:head>
+	<title>out(fit)</title>
+</svelte:head>
 <div>
 	<Header header={data.header} logo={data.logo} />
 	<StoryblokComponent blok={data.story.content} />
