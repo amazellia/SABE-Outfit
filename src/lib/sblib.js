@@ -43,7 +43,7 @@ export async function useStoryblok(accessToken = '') {
 			resolver: (component, blok) => {
 			  switch (component) {
 				case "gallery":
-					if (blok.type == "carousel1") {
+					if (blok.type == "carousel" || blok.type == undefined) {
 						const images = blok.images.map((item, index) => {
 							return `
 								<div class="carousel-item place-content-center">
@@ -70,7 +70,7 @@ export async function useStoryblok(accessToken = '') {
 							</div>
 						`;
 					}					
-					if (blok.type == "carousel" || blok.type == undefined) {
+					if (blok.type == "carousel_nextprev") {
 						const images = blok.images.map((item, i, img) => {
 							const previousItem = i > 0 ? img[i - 1] : null;
 							const nextItem = i < img.length - 1 ? img[i + 1] : null;
