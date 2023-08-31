@@ -43,6 +43,7 @@ export async function useStoryblok(accessToken = '') {
 			resolver: (component, blok) => {
 			  switch (component) {
 				case "gallery":
+					// https://www.storyblok.com/tp/build-your-own-showcase-gallery-with-storyblok-sveltekit-and-edgio
 					if (blok.type == "carousel" || blok.type == undefined) {
 						const images = blok.images.map((item, index) => {
 							return `
