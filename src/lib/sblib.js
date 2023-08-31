@@ -63,7 +63,7 @@ export async function useStoryblok(accessToken = '') {
 						});
 		
 						return `
-							<div class="carousel content-center w-full h-96 md:h-screen lg:h-screen ">
+							<div class="carousel content-center w-auto h-80 md:h-screen">
 								${images.join('')}
 							</div>
 							<div class="flex justify-center w-full py-2 gap-2">
@@ -99,8 +99,8 @@ export async function useStoryblok(accessToken = '') {
 					if (blok.type = "sponsors") {
 						const images = blok.images.map((item) => {
 							return ` 
-							<div id="${item.id}" class="w-full p-2">
-							<img src="${item.filename}" alt="${item.alt}" class="w-full h-auto object-cover"/>
+							<div id="${item.id}" class="bg-#f8fafc w-full p-2">
+							<img src="${item.filename}" alt="${item.alt}" class="overflow-hidden rounded-md w-full h-auto object-cover"/>
 							</div>`;
 						});
 						return `
